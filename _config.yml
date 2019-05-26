@@ -29,8 +29,8 @@ search: true
 nightMode: true
 
 # Comments
-disqus: false
-disqus_url: 'https://liaokeyu.disqus.com/embed.js'
+disqus: true
+disqus_url: 'https://https-hulushuo-github-io.disqus.com/embed.js'
 
 
 
