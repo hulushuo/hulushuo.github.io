@@ -32,7 +32,7 @@ nightMode: true
 disqus: false
 disqus_url: 'https://liaokeyu.disqus.com/embed.js'
 
-livere: true
+livere: false
 livere_uid: Mi8xLzM=
 
 # Gitalk
@@ -55,8 +55,8 @@ gitalk:
 reward:
   enable: true
   reward_comment: '取之于民 用之于民'
-  wechatpay: 'http://img02.sogoucdn.com/app/a/100520146/13ea58020094843dc29ded8fd85066f1'
-  alipay: 'http://img01.sogoucdn.com/app/a/100520146/8e9e136d91fafdc17b11a476eeec0795'
+  wechatpay: 'https://i.loli.net/2019/05/26/5cea272e6688292474.png'
+  alipay: 'https://i.loli.net/2019/05/26/5cea27528aa8191570.jpg'
 
 # b2t 回到顶部 by Ray-Eldath
 b2t: true
