@@ -15,7 +15,7 @@ cover: https://i.loli.net/2019/06/01/5cf29f764bce193576.jpg
 
 ![](https://i.loli.net/2019/06/01/5cf29ff0e231267266.jpg)
 
-<iframe frameborder="0"  src="https://v.qq.com/txp/iframe/player.html?vid=g0878g8887r" allowfullscreen id="iframe"></iframe>
+<iframe frameborder="0"  src="https://v.qq.com/txp/iframe/player<iframe height=498 width=510 src='http://player.youku.com/embed/XNDI5NTY3NDA2NA==' frameborder=0 'allowfullscreen'></iframe>
 
 
 <center> 温馨提示：结合本期精选视频，建议阅读文章后再来看哦 </center>
