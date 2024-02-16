@@ -1,0 +1,836 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>测试开发导航之web自动化+上瘾Playwright | Myhao</title><meta name="author" content="马永浩"><meta name="copyright" content="马永浩"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="web自动化从入门到精通，AIGC时代用playwright完虐selenium">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试开发导航之web自动化+上瘾Playwright">
+<meta property="og:url" content="https://myhao.vercel.app/202401/61b9dd27.html">
+<meta property="og:site_name" content="Myhao">
+<meta property="og:description" content="web自动化从入门到精通，AIGC时代用playwright完虐selenium">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg">
+<meta property="article:published_time" content="2024-01-10T22:38:42.000Z">
+<meta property="article:modified_time" content="2024-02-16T07:08:58.349Z">
+<meta property="article:author" content="马永浩">
+<meta property="article:tag" content="Web自动化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg"><link rel="shortcut icon" href="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="canonical" href="https://myhao.vercel.app/202401/61b9dd27.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":300,"languages":{"author":"作者: 马永浩","link":"链接: ","source":"来源: Myhao","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '测试开发导航之web自动化+上瘾Playwright',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-16 07:08:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/cursor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Myhao"><span class="site-name">Myhao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">测试开发导航之web自动化+上瘾Playwright</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-10T22:38:42.000Z" title="发表于 2024-01-10 22:38:42">2024-01-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-16T07:08:58.349Z" title="更新于 2024-02-16 07:08:58">2024-02-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>42分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="测试开发导航之web自动化+上瘾Playwright"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img gist" style="background-image: url(https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg)"></div><article class="post-content" id="article-container"><h3 id="selenium真多坑"><a href="#selenium真多坑" class="headerlink" title="selenium真多坑"></a>selenium真多坑</h3><p>1.聊聊为什么不推荐selenium</p>
+<ul>
+<li>使用selenium做web自动化过程中会用到各种库，在调用浏览器时必须要有与浏览器版本对应的驱动，最坑的是较新的版本有时找不到官方的驱动无处下载，在selenium执行代码时又时不时的报错，极不稳定。在一些网站还会被检测自动化。</li>
+<li>所以，不限于以上种种难受使用体验，放弃selenium了。</li>
+</ul>
+<p>2.改用Playwright：可爬虫、可自动化</p>
+<ul>
+<li>Playwright是微软开源的web自动化测试工具 支持主流的浏览器，包含：Chrome、Firefox、Safari、Microsoft Edge 等,同时支持以无头模式、有头模式运行. 也支持很多语言，常用的<code>python Node C++ Java</code>都有支持。</li>
+<li>python 也可以结合 Pytest 测试框架 使用，并且支持浏览器端的自动化脚本录制。</li>
+</ul>
+<h4 id="Playwright简介"><a href="#Playwright简介" class="headerlink" title="Playwright简介"></a>Playwright简介</h4><p>官网文档：<a target="_blank" rel="noopener" href="https://playwright.dev/docs/intro">Playwright</a></p>
+<p>Playwright是微软开发的Web应用的自动化测试框架，是一款强大的UI自动化工具、新兴爬虫利器。 Playwright的优点：</p>
+<ul>
+<li><strong>跨浏览器</strong>：Playwright 支持所有现代渲染引擎，包括：Chromium、WebKit 和 Firefox</li>
+<li><strong>跨平台</strong>：适用于 Windows、Linux、macOS、本地运行、 CI、headless 和 headed</li>
+<li><strong>跨语言</strong>：在 TypeScript, JavaScript, Python, .NET, Java 中使用 Playwright API</li>
+<li><strong>自动等待</strong>： Playwright 能够自动等待元素达到可操作的状态，外加一系列丰富的内置事件。不用再人工定义超时</li>
+<li><strong>Web 优先的断言</strong>：Playwright 断言专门为动态加载的 web 应用设计，能够在满足需要的条件前自动重试</li>
+<li><strong>可追踪</strong>：通过配置重试策略，采用捕捉执行轨迹、视频、截图来解决测试容易失效的问题</li>
+<li><strong>一切并行</strong>：跨越多个 <strong>tabs</strong>, 多个 <strong>origins</strong> 和多个 <strong>users</strong> 的测试场景。在一个测试中能够为不同的用户创建具有不同上下文的场景，并能在你的服务器上运行</li>
+<li><strong>浏览器上下文</strong>：Playwright 为每个测试创建一个浏览器上下文，浏览器上下文相当于一个全新的浏览器配置文件，这提供了零开销的完整测试隔离，创建一个新的浏览器上下文只需要几毫秒。</li>
+<li><strong>一次登录</strong>：保存上下文的身份验证状态并在所有测试中重用它，这绕过了每个测试中的重复登录操作，但提供了独立测试的完全隔离</li>
+<li><strong>Codegen</strong>：通过记录您的操作来生成测试，将它们保存为各种语言</li>
+</ul>
+<h4 id="Playwright与Selenium的区别"><a href="#Playwright与Selenium的区别" class="headerlink" title="Playwright与Selenium的区别"></a>Playwright与Selenium的区别</h4><p><code>区别一</code>： Selenium 只提供了 Web 自动化功能， 如果你要做自动化测试，需要结合其它自动化测试框架 而 Playwright 是面向自动化测试的，除了Web自动化功能，它也包含了自动化测试的功能框架； </p>
+<p><code>区别二</code>： 两者的自动化原理有些差别，如下图所示</p>
+<p><img src="https://gitee.com/brucema313/images/raw/master/img/202402142252393.webp"></p>
+<h3 id="安装playwright"><a href="#安装playwright" class="headerlink" title="安装playwright"></a>安装playwright</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install playwright</span><br><span class="line">playwright install</span><br><span class="line">playwright install chromium #按需安装，重新安装一下（chromium 是其中一个浏览器插件，看自己用什么就装什么）</span><br><span class="line">pip install pytest-playwright  # 自带page对象</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装浏览器"><a href="#安装浏览器" class="headerlink" title="安装浏览器"></a>安装浏览器</h4><p><code>playwright install</code> playwright 这个项目默认使用自己编译好的几种浏览器，比如 chromium， firefox， webkit，这些浏览器是通过各自的开源项目编译出来的。 和我们下载安装的 Chrome，Firefox，Safri 这些品牌浏览器（stock browser）的区别，请看这里playwright 每个版本都绑定 自编译浏览器的某个版本， 可以通过 官方Release Note 看到对应关系<img src="https://gitee.com/brucema313/images/raw/master/img/202402142253224.webp" alt="图片">脚本录制：<code>python -m playwright codegen</code>，脚本录制参数后续会详细介绍</p>
+<h4 id="同步API"><a href="#同步API" class="headerlink" title="同步API"></a>同步API</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="comment"># with管理器（方便使用，但是js加载如果有事件监听太多可能会崩溃）</span></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 建议使用（一般情况用with就可以了）</span></span><br><span class="line">    <span class="comment"># p = sync_playwright().start()</span></span><br><span class="line">    <span class="comment"># browser = p.chromium.launch()</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可以选择chromium、firefox和webkit运行chrome浏览器</span></span><br><span class="line">    <span class="comment"># False是有头模式，默认为true是无头模式</span></span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment"># 打开百度地址</span></span><br><span class="line">    <span class="comment"># 标题</span></span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line">    page.fill(<span class="string">&#x27;#kw&#x27;</span>, <span class="string">&#x27;python&#x27;</span>)  <span class="comment"># 输入内容</span></span><br><span class="line">    page.click(<span class="string">&#x27;#su&#x27;</span>)  <span class="comment"># 点击搜索</span></span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    <span class="comment"># 将等待时间修改为下面这行代码</span></span><br><span class="line">    <span class="comment">#page.wait_for_timeout(3000)</span></span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建议使用（一般情况用with就可以了）</span></span><br><span class="line"><span class="comment"># p = sync_playwright().start()</span></span><br><span class="line"><span class="comment"># browser = p.chromium.launch()</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过使用 <code>with as</code> 会话管理，我们的代码简化，不需要调用 <code>start()</code> 和<code>stop()</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="comment"># with管理器（方便使用，但是js加载如果有事件监听太多可能会崩溃）</span></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>未简化前代码：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建议使用（一般情况用with就可以了）</span></span><br><span class="line">p = sync_playwright().start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以选择chromium、firefox和webkit运行chrome浏览器</span></span><br><span class="line"><span class="comment"># False是有头模式，默认为true是无头模式</span></span><br><span class="line">browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">context = browser.new_context()</span><br><span class="line"><span class="comment"># 打开新页面</span></span><br><span class="line">page = context.new_page()</span><br><span class="line"><span class="comment"># 调到指定页面</span></span><br><span class="line">page.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment"># 打开百度地址</span></span><br><span class="line"><span class="comment"># 标题</span></span><br><span class="line"><span class="built_in">print</span>(page.title())</span><br><span class="line">page.fill(<span class="string">&#x27;#kw&#x27;</span>, <span class="string">&#x27;python&#x27;</span>)  <span class="comment"># 输入内容</span></span><br><span class="line">page.click(<span class="string">&#x27;#su&#x27;</span>)  <span class="comment"># 点击搜索</span></span><br><span class="line">time.sleep(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 将等待时间修改为下面这行代码</span></span><br><span class="line"><span class="comment">#page.wait_for_timeout(3000)</span></span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">browser.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面代码中，启动的浏览器类型，同样可以更换成以下类型：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动firefox浏览器</span><br><span class="line">browser = p.firefox.launch(headless=False)</span><br><span class="line"># 启动webkit浏览器</span><br><span class="line">browser = p.webkit.launch(headless=False)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以通过参数 <code>executable_path</code> 指定使用安装的其它浏览器：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 加上 executable_path参数</span><br><span class="line">    browser = p.chromium.launch(headless=False,</span><br><span class="line">                                executable_path=&#x27;C:\Program Files\Google\Chrome\Application\chrome.exe&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="playwright基础用法"><a href="#playwright基础用法" class="headerlink" title="playwright基础用法"></a>playwright基础用法</h3><h4 id="界面等待"><a href="#界面等待" class="headerlink" title="界面等待"></a>界面等待</h4><p>不能在Playwright中使用 <code>time.sleep()</code> 进行等待，因为Playwright底层使用的是异步的python库进行各种事件处理，<code>time.sleep()</code> 会破坏异步框架的处理逻辑。 我们可以使用可以使用 Page 对象的 <code>wait_for_timeout</code> 方法达到等待效果，单位是 <code>毫秒</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = browser.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).fill(<span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    <span class="comment"># 将等待时间修改为下面这行代码</span></span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    browser.close()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 等待元素出现 超时5秒</span></span><br><span class="line"><span class="comment"># visible：指定元素必须可见，默认为 False。</span></span><br><span class="line"><span class="comment"># hidden：指定元素必须隐藏，默认为 False。</span></span><br><span class="line">page.wait_for_selector(<span class="string">&#x27;#my-element&#x27;</span>, &#123; timeout: <span class="number">5000</span> &#125;)</span><br><span class="line"><span class="comment"># load：页面完全加载完成。</span></span><br><span class="line"><span class="comment"># domcontentloaded：DOM 内容加载完成。</span></span><br><span class="line"><span class="comment"># networkidle0：网络空闲状态时。</span></span><br><span class="line"><span class="comment"># networkidle2：网络连接数稳定且超过 500 毫秒。</span></span><br><span class="line">page.wait_for_load_state(<span class="string">&#x27;networkidle&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="跟踪记录"><a href="#跟踪记录" class="headerlink" title="跟踪记录"></a>跟踪记录</h4><p>Playwright 有个特色功能： 跟踪（tracing） 启用跟踪功能后， 可以在执行自动化后，通过记录的跟踪数据文件， 回看自动化过程中的每个细节。 以下代码实现打开百度进行搜索playwright和python。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># 创建 BrowserContext对象</span></span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    context.tracing.start(snapshots=<span class="literal">True</span>, sources=<span class="literal">True</span>, screenshots=<span class="literal">True</span>)</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).fill(<span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).fill(<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    context.tracing.stop(path=<span class="string">&quot;trace.zip&quot;</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<p>执行完代码后，同级目录中自动生成一个trace.zip的文件，我们可以通过两种方式来打开</p>
+<ul>
+<li>直接访问 trace.playwright.dev 这个网站，上传跟踪文件</li>
+<li>执行命令 <code>playwright show-trace trace.zip</code>。</li>
+</ul>
+<h4 id="元素定位与操作"><a href="#元素定位与操作" class="headerlink" title="元素定位与操作"></a>元素定位与操作</h4><p>使用pause断点生成代码复制粘贴最为方便</p>
+<p>滚动到元素出现在屏幕看见位置： <code>page1.get_by_placeholder(&#39;&#39;).scroll_into_view_if_needed()</code></p>
+<p><strong>1.css定位</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">page.click(&#x27;input[name=&quot;goto_tdouya_homepage&quot;]&#x27;)</span><br><span class="line"></span><br><span class="line">page.goto(&quot;https://www.baidu.com&quot;)</span><br><span class="line">page.locator(&#x27;#kw&#x27;).fill(&#x27;playwright&#x27;)</span><br><span class="line"># 先定位再点击</span><br><span class="line">page.locator(&#x27;#su&#x27;).click()</span><br><span class="line"></span><br><span class="line"># 或者直接点击</span><br><span class="line">page.click(&#x27;xpath=//*[@id=&quot;s-top-left&quot;]/a[1]&#x27;)</span><br><span class="line"></span><br><span class="line"># 悬停</span><br><span class="line">page.locator(&quot;//span[text()=&#x27;设置&#x27;]&quot;).hover()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>同样的，我们可以直接调用<code>fill()</code>和<code>click()</code>方法</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page.goto(&quot;https://www.baidu.com&quot;)</span><br><span class="line">page.fill(&#x27;#kw&#x27;,&#x27;playwright&#x27;)</span><br><span class="line">page.click(&#x27;#su&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.xpath定位</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">page.goto(&quot;https://www.baidu.com&quot;)</span><br><span class="line">page.fill(&#x27;//*[@id=&quot;kw&quot;]&#x27;, &quot;playwright&quot;)</span><br><span class="line">page.click(&#x27;//*[@id=&quot;su&quot;]&#x27;)</span><br><span class="line">page.click(&#x27;xpath=//*[@id=&quot;s-top-left&quot;]/a[1]&#x27;)</span><br><span class="line"># 省略xpath</span><br><span class="line">page.click(&#x27;//*[@id=&quot;s-top-left&quot;]/a[1]&#x27;)</span><br><span class="line"></span><br><span class="line">self.page.locator(&#x27;[class=&quot;menu-type-title&quot;]&#x27;).filter(has_text=&quot;计算&quot;).first.highlight()</span><br><span class="line"></span><br><span class="line"># Xpath 删除 计算 前后的空白字符进行匹配</span><br><span class="line">self.page.locator(&#x27;//a[normalize-space()=&quot;计算&quot;]&#x27;).highlight()</span><br><span class="line"># Xpath文本匹配</span><br><span class="line">self.page.locator(&#x27;//a[text()=&quot;计算&quot;]&#x27;).highlight()</span><br><span class="line"># Xpath 多级匹配</span><br><span class="line">self.page.locator(&#x27;//div[@class=&quot;menu-left-content&quot;]//a[text()=&quot;计算&quot;]&#x27;).highlight()</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.文本定位</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 模糊匹配，不区分大小写</span><br><span class="line">page.click(&quot;text=playwright&quot;)</span><br><span class="line"># 精确匹配，区分大小写</span><br><span class="line">page.click(&quot;text=&#x27;Playwright&#x27;&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对文本匹配还可以通过xpath的方式进行匹配：</p>
+<ul>
+<li>完全匹配文本 &#x2F;&#x2F;*[text()&#x3D;”playwright “]</li>
+<li>部分匹配文本 &#x2F;&#x2F;*[contains(text(), “playwright”)]</li>
+</ul>
+</blockquote>
+<p><strong>4.其他定位方式</strong></p>
+<p>Playwright提供的一些常用的内置定位方式：</p>
+<ul>
+<li><code>page.get_by_role()</code>：通过显式和隐式可访问性属性进行定位</li>
+<li><code>page.get_by_text()</code>：通过文本内容定位</li>
+<li><code>page.get_by_title()</code>：通过标题属性定位元素</li>
+<li><code>page.get_by_placeholder()</code>：按占位符定位输入</li>
+<li><code>page.get_by_alt_text()</code>：通过替代文本定位元素，通常是图像</li>
+<li><code>page.get_by_test_id()</code>：根据data-testid属性定位元素（可以配置其他属性）</li>
+<li><code>page.get_by_label()</code>：通过关联标签的文本定位表单控件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">page.get_by_role(<span class="string">&quot;button&quot;</span>).click()</span><br><span class="line"><span class="comment"># exact=True 精准匹配，文本解决复杂的定位元素层级定位，dom树变化也不影响定位元素</span></span><br><span class="line">page.get_by_text(<span class="string">&#x27;登录&#x27;</span>,exact=<span class="literal">True</span>).click()  </span><br><span class="line"><span class="comment"># &lt;input placeholder=&quot;密码&quot; /&gt; 比较常用</span></span><br><span class="line">page.get_by_placeholder(<span class="string">&quot;密码&quot;</span>).fill(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># &lt;input label=&quot;password&quot; /&gt;</span></span><br><span class="line">page.get_by_label(<span class="string">&quot;password&quot;</span>).fill(<span class="string">&quot;123456&quot;</span>)</span><br><span class="line"><span class="comment"># &lt;link rel=&quot;search&quot; href=&quot;/content-search.xml&quot; title=&quot;百度搜索&quot;&gt;</span></span><br><span class="line">page.get_by_title(<span class="string">&quot;百度搜索&quot;</span>)</span><br><span class="line"><span class="comment"># &lt;img alt=&quot;playwright logo&quot; ... /&gt; 一般不常用</span></span><br><span class="line">page.get_by_alt_text(<span class="string">&quot;playwright logo&quot;</span>).click()</span><br></pre></td></tr></table></figure>
+
+<p>网页代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;Sign up&lt;/h3&gt;</span><br><span class="line">&lt;label&gt;</span><br><span class="line">  &lt;input type=&quot;checkbox&quot; /&gt; Subscribe</span><br><span class="line">&lt;/label&gt;</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">&lt;button&gt;Submit&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>定位用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这个是pytest-playwright进行断言的方式，后续我们会讲</span><br><span class="line">expect(page.get_by_role(&quot;heading&quot;, name=&quot;Sign up&quot;)).to_be_visible()</span><br><span class="line"></span><br><span class="line">page.get_by_role(&quot;checkbox&quot;, name=&quot;Subscribe&quot;).check()</span><br><span class="line"></span><br><span class="line">page.get_by_role(&quot;button&quot;, name=re.compile(&quot;submit&quot;, re.IGNORECASE)).click()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>W3C标准规定的webDriver协议为5种定位方式CSS、Link text、Partial link text、Tag name、XPath；playwright把这些定位归类成3种，分别是：css、xpath、text；</p>
+</blockquote>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">page.locator(&#x27;xpath=//h2&#x27;)</span><br><span class="line">page.locator(&#x27;text=文本输入&#x27;)</span><br><span class="line">page.locator(&#x27;#s-uersetting-top&#x27;)</span><br><span class="line">page.locator(&#x27;input[name=]&#x27;).click()</span><br><span class="line">page.get_by_role(&#x27;button&#x27;,name=&#x27;百度一下&#x27;).click()</span><br><span class="line">page.get_by_placeholder(&#x27;唱片&#x27;).click()</span><br><span class="line">page.get_by_text(&#x27;&#x27;).click()</span><br></pre></td></tr></table></figure>
+
+<h4 id="悬浮元素定位"><a href="#悬浮元素定位" class="headerlink" title="悬浮元素定位"></a>悬浮元素定位</h4><p><strong>「优点」</strong>：能够把悬浮元素固定不消失</p>
+<ul>
+<li>F12打开浏览器的调试页面</li>
+<li>点击<code>源代码Sources</code></li>
+<li>右侧找到<code>事件监听器断点（Event Listener breakpoints）</code>， 点开</li>
+<li>找到<code>Mouse</code>, 点开</li>
+<li>找到<code>click</code>，勾上</li>
+</ul>
+<h3 id="页面交互"><a href="#页面交互" class="headerlink" title="页面交互"></a>页面交互</h3><blockquote>
+<p>在对元素进行定位后的操作，达到与页面进行交互的目的，比如鼠标点击，输入文本，单选&#x2F;多选的操作等。</p>
+</blockquote>
+<h4 id="获取内容"><a href="#获取内容" class="headerlink" title="获取内容"></a>获取内容</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取源码，可搭配beautifulsoup</span></span><br><span class="line">html = page.content()</span><br><span class="line"><span class="comment"># 所有img节点，for循环一下获取单个的</span></span><br><span class="line">imgs = page.query_selector_all(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"><span class="comment"># 获取单个节点</span></span><br><span class="line">ele1 = page.query_selector(<span class="string">&#x27;#id.class&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标签a的链接</span></span><br><span class="line">a.get_attribute(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line"><span class="comment"># 标签a的文本</span></span><br><span class="line">a.inner_text()</span><br><span class="line"><span class="comment"># 输入框的值</span></span><br><span class="line"><span class="built_in">input</span>.input_value()</span><br></pre></td></tr></table></figure>
+
+<h4 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># page.screenshot(path=None, *, full_page=True, clip=None, quality=None, omit_background=False)</span></span><br><span class="line"><span class="comment"># path：指定截图保存的文件路径和文件名。</span></span><br><span class="line"><span class="comment"># full_page：指定截图是否包含整个页面，默认为 True。</span></span><br><span class="line"><span class="comment"># clip：指定截图的大小和位置。</span></span><br><span class="line"><span class="comment"># quality：指定截图的质量。</span></span><br><span class="line"><span class="comment"># omit_background：指定是否忽略背景色。</span></span><br><span class="line">page.screenshot(path=<span class="string">&#x27;example.webp&#x27;</span>, full_page=<span class="literal">True</span>)</span><br><span class="line">page.screenshot(clip=&#123;<span class="string">&#x27;x&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;y&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;width&#x27;</span>: <span class="number">800</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">600</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前页面截图</span></span><br><span class="line">page.screenshot(path=<span class="string">&quot;screenshot.webp&quot;</span>)</span><br><span class="line"><span class="comment"># 当前页面长截图</span></span><br><span class="line">page.screenshot(path=<span class="string">&quot;screenshot.webp&quot;</span>, full_page=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 将截图转为字节存储在缓存中</span></span><br><span class="line">screenshot_bytes = page.screenshot()</span><br><span class="line"><span class="built_in">print</span>(base64.b64encode(screenshot_bytes).decode())</span><br><span class="line"><span class="comment"># 根据元素截图</span></span><br><span class="line">page.locator(<span class="string">&quot;.header&quot;</span>).screenshot(path=<span class="string">&quot;screenshot.webp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>「参数」</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">类型</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">timeout</td>
+<td align="left">Union[float, None]</td>
+<td align="left">最大等待时间，以毫秒为单位。默认为<code>30000</code>（30秒）。传入<code>0</code>以禁用超时。<code>browser_context.set_default_timeout()</code>或<code>page.set_default_timeout()</code>方法更改默认值。</td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">Union[“jpeg”, “png”, None]</td>
+<td align="left">指定截图的类型，默认为png。</td>
+</tr>
+<tr>
+<td align="left">path</td>
+<td align="left">Union[pathlib.Path, str, None]</td>
+<td align="left">图像保存的文件路径。截图类型将根据文件扩展名进行推断。如果<code>path</code>是相对路径，则相对于当前工作目录解析。如果不提供路径，则图像将不会保存到磁盘。</td>
+</tr>
+<tr>
+<td align="left">quality</td>
+<td align="left">Union[int, None]</td>
+<td align="left">图像的质量，介于0到100之间。不适用于<code>png</code>图像。</td>
+</tr>
+<tr>
+<td align="left">omit_background</td>
+<td align="left">Union[bool, None]</td>
+<td align="left">隐藏默认的白色背景，允许使用透明度进行截图。不适用于<code>jpeg</code>图像。默认为<code>false</code>。</td>
+</tr>
+<tr>
+<td align="left">full_page</td>
+<td align="left">Union[bool, None]</td>
+<td align="left">为<code>true</code>时，截取完整可滚动页面的屏幕截图，而不是当前可见的视口。默认为<code>false</code>。</td>
+</tr>
+<tr>
+<td align="left">clip</td>
+<td align="left">Union[{x: float, y: float, width: float, height: float}, None]</td>
+<td align="left">指定结果图像的裁剪区域的对象。</td>
+</tr>
+<tr>
+<td align="left">animations</td>
+<td align="left">Union[“allow”, “disabled”, None]</td>
+<td align="left">设置为<code>&quot;disabled&quot;</code>时，停止CSS动画、CSS过渡和Web动画。动画的处理方式取决于其持续时间：有限动画将快进到完成状态，因此它们会触发<code>transitionend</code>事件。无限动画将取消到初始状态，然后在截图后重新播放。默认为<code>&quot;allow&quot;</code>，即保持动画不变。</td>
+</tr>
+<tr>
+<td align="left">caret</td>
+<td align="left">Union[“hide”, “initial”, None]</td>
+<td align="left">设置为<code>&quot;hide&quot;</code>时，截图将隐藏文本插入符。设置为<code>&quot;initial&quot;</code>时，文本插入符的行为不会改变。默认为<code>&quot;hide&quot;</code>。</td>
+</tr>
+<tr>
+<td align="left">scale</td>
+<td align="left">Union[“css”, “device”, None]</td>
+<td align="left">设置为<code>&quot;css&quot;</code>时，截图上每个CSS像素将具有一个实际像素。对于高DPI设备，这将使截图保持较小的大小。使用<code>&quot;device&quot;</code>选项将使每个设备像素有一个实际像素，因此高DPI设备的截图将是两倍或更大。默认为<code>&quot;device&quot;</code>。</td>
+</tr>
+<tr>
+<td align="left">mask</td>
+<td align="left">Union[List[Locator], None]</td>
+<td align="left">指定在截图时应隐藏的定位符。被隐藏的元素将被叠加一个粉色框<code>#FF00FF</code>（由<code>maskColor</code>自定义），完全覆盖其边界框。</td>
+</tr>
+<tr>
+<td align="left">mask_color</td>
+<td align="left">Union[str, None]</td>
+<td align="left">指定被隐藏元素的覆盖框的颜色，以CSS颜色格式表示。默认颜色为粉色<code>#FF00FF</code>。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>locator截图：</p>
+<p>该方法将截取页面的屏幕截图，并根据定位符匹配的特定元素的大小和位置进行裁剪。</p>
+<p>如果该元素被其他元素覆盖，则在截图上实际上不可见。</p>
+<p>如果该元素是可滚动容器，则截图上只会显示当前滚动的内容。</p>
+<p>该方法会等待可操作性检查，然后将元素滚动到视图中，然后再进行截图。</p>
+<p>如果该元素已从 DOM 中移除，则该方法会抛出一个错误。</p>
+</blockquote>
+<p><strong>「用法」</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">page.get_by_role(&quot;link&quot;).screenshot()</span><br><span class="line">page.locator(&quot;#main-content&quot;).screenshot()</span><br></pre></td></tr></table></figure>
+
+<p><strong>「参数」</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">类型</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">timeout</td>
+<td align="left">Union[float, None]</td>
+<td align="left">最大等待时间，以毫秒为单位。默认为<code>30000</code>（30秒）。传入<code>0</code>以禁用超时。<code>browser_context.set_default_timeout()</code>或<code>page.set_default_timeout()</code>方法更改默认值。</td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">Union[“jpeg”, “png”, None]</td>
+<td align="left">指定截图的类型，默认为png。</td>
+</tr>
+<tr>
+<td align="left">path</td>
+<td align="left">Union[pathlib.Path, str, None]</td>
+<td align="left">图像保存的文件路径。截图类型将根据文件扩展名进行推断。如果<code>path</code>是相对路径，则相对于当前工作目录解析。如果不提供路径，则图像将不会保存到磁盘。</td>
+</tr>
+<tr>
+<td align="left">quality</td>
+<td align="left">Union[int, None]</td>
+<td align="left">图像的质量，介于0到100之间。不适用于<code>png</code>图像。</td>
+</tr>
+<tr>
+<td align="left">omit_background</td>
+<td align="left">Union[bool, None]</td>
+<td align="left">隐藏默认的白色背景，允许使用透明度进行截图。不适用于<code>jpeg</code>图像。默认为<code>false</code>。</td>
+</tr>
+<tr>
+<td align="left">animations</td>
+<td align="left">Union[“allow”, “disabled”, None]</td>
+<td align="left">设置为<code>&quot;disabled&quot;</code>时，停止CSS动画、CSS过渡和Web动画。动画的处理方式取决于其持续时间：有限动画将快进到完成状态，因此它们会触发<code>transitionend</code>事件。无限动画将取消到初始状态，然后在截图后重新播放。默认为<code>&quot;allow&quot;</code>，即保持动画不变。</td>
+</tr>
+<tr>
+<td align="left">caret</td>
+<td align="left">Union[“hide”, “initial”, None]</td>
+<td align="left">设置为<code>&quot;hide&quot;</code>时，截图将隐藏文本插入符。设置为<code>&quot;initial&quot;</code>时，文本插入符的行为不会改变。默认为<code>&quot;hide&quot;</code>。</td>
+</tr>
+<tr>
+<td align="left">scale</td>
+<td align="left">Union[“css”, “device”, None]</td>
+<td align="left">设置为<code>&quot;css&quot;</code>时，截图上每个CSS像素将具有一个实际像素。对于高DPI设备，这将使截图保持较小的大小。使用<code>&quot;device&quot;</code>选项将使每个设备像素有一个实际像素，因此高DPI设备的截图将是两倍或更大。默认为<code>&quot;device&quot;</code>。</td>
+</tr>
+<tr>
+<td align="left">mask</td>
+<td align="left">Union[List[Locator], None]</td>
+<td align="left">指定在截图时应隐藏的定位符。被隐藏的元素将被叠加一个粉色框<code>#FF00FF</code>（由<code>maskColor</code>自定义），完全覆盖其边界框。</td>
+</tr>
+<tr>
+<td align="left">mask_color</td>
+<td align="left">Union[str, None]</td>
+<td align="left">指定被隐藏元素的覆盖框的颜色，以CSS颜色格式表示。默认颜色为粉色<code>#FF00FF</code>。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>「注意点」</strong></p>
+<p>locator类下的截图方法，是比page类下的截图方法少了两个可选参数。</p>
+<p><strong>「full_page」</strong>：对于元素截图不支持全页面滚动长截图。</p>
+<p><strong>「clip」</strong>：对于元素截图不支持裁剪。</p>
+</blockquote>
+<h4 id="元素坐标"><a href="#元素坐标" class="headerlink" title="元素坐标"></a>元素坐标</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bounding = page1.locator(&#x27;#mycanvas-9&#x27;).bounding_box()</span><br><span class="line">print(bounding)  # &#123;&#x27;x&#x27;: 281, &#x27;y&#x27;: 91, &#x27;width&#x27;: 500, &#x27;height&#x27;: 500&#125;</span><br><span class="line">print(bounding[&#x27;x&#x27;])</span><br></pre></td></tr></table></figure>
+
+<h4 id="鼠标画图"><a href="#鼠标画图" class="headerlink" title="鼠标画图"></a>鼠标画图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    context.tracing.start(snapshots=<span class="literal">True</span>, sources=<span class="literal">True</span>, screenshots=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page1.goto(<span class="string">&#x27;https://draw.yunser.com/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    bounding = page1.locator(<span class="string">&#x27;#mycanvas-9&#x27;</span>).bounding_box()</span><br><span class="line">    <span class="built_in">print</span>(bounding)  <span class="comment"># &#123;&#x27;x&#x27;: 281, &#x27;y&#x27;: 91, &#x27;width&#x27;: 500, &#x27;height&#x27;: 500&#125;</span></span><br><span class="line">    <span class="built_in">print</span>(bounding[<span class="string">&#x27;x&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># page1.locator(&#x27;#mycanvas-9&#x27;).hover()</span></span><br><span class="line">    <span class="comment"># 使用` page.mouse` 画 一个100x100的正方形。</span></span><br><span class="line">    <span class="comment"># 鼠标移动到（0,0）坐标</span></span><br><span class="line">    page1.mouse.move(bounding[<span class="string">&#x27;x&#x27;</span>]+<span class="number">5</span>, bounding[<span class="string">&#x27;y&#x27;</span>]+<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># 按下鼠标</span></span><br><span class="line">    page1.mouse.down()</span><br><span class="line">    <span class="comment"># 鼠标纵坐标向下移动100像素</span></span><br><span class="line">    page1.mouse.move(bounding[<span class="string">&#x27;x&#x27;</span>]+<span class="number">5</span>, bounding[<span class="string">&#x27;y&#x27;</span>]+<span class="number">105</span>)</span><br><span class="line">    <span class="comment"># 鼠标横坐标向右移动100像素</span></span><br><span class="line">    page1.mouse.move(bounding[<span class="string">&#x27;x&#x27;</span>]+<span class="number">105</span>, bounding[<span class="string">&#x27;y&#x27;</span>]+<span class="number">105</span>)</span><br><span class="line">    <span class="comment"># 鼠标纵坐标向上移动100像素</span></span><br><span class="line">    page1.mouse.move(bounding[<span class="string">&#x27;x&#x27;</span>]+<span class="number">105</span>, bounding[<span class="string">&#x27;y&#x27;</span>]+<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># 鼠标横坐标向左移动100像素</span></span><br><span class="line">    page1.mouse.move(bounding[<span class="string">&#x27;x&#x27;</span>]+<span class="number">5</span>, bounding[<span class="string">&#x27;y&#x27;</span>]+<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># 释放鼠标</span></span><br><span class="line">    page1.mouse.up()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    context.tracing.stop(path=<span class="string">&quot;trace.zip&quot;</span>)</span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="鼠标滚动"><a href="#鼠标滚动" class="headerlink" title="鼠标滚动"></a>鼠标滚动</h4><p><strong>「使用方法」</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mouse.wheel(delta_x, delta_y)</span><br><span class="line"></span><br><span class="line">delta_x = 0 #水平滚动0像素</span><br><span class="line">delta_y = 100 #垂直滚动100像素</span><br><span class="line">page1.mouse.wheel(delta_x, delta_y)</span><br></pre></td></tr></table></figure>
+
+<p><strong>「参数」</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">类型</th>
+<th align="left">释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">delta_x</td>
+<td align="left">float</td>
+<td align="left">要水平滚动的像素</td>
+</tr>
+<tr>
+<td align="left">delta_y</td>
+<td align="left">float</td>
+<td align="left">要垂直滚动的像素</td>
+</tr>
+</tbody></table>
+<h4 id="输入文本"><a href="#输入文本" class="headerlink" title="输入文本"></a>输入文本</h4><blockquote>
+<p>1 <code>locator.fill()</code>是输入文本做简单，最常用的一个方法，它聚焦元素并input使用输入的文本触发事件。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = browser.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line">    <span class="comment"># page.locator(&#x27;#kw&#x27;).fill(&#x27;playwright&#x27;) #另一种写法</span></span><br><span class="line">    page.fill(<span class="string">&#x27;#kw&#x27;</span>,<span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>内容清空使用fill，在“”中不输入任何内容就是清空。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">2000</span>)</span><br><span class="line">    page = browser.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).<span class="built_in">type</span>(<span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).fill(<span class="string">&#x27;&#x27;</span>) <span class="comment">#另一种写法</span></span><br><span class="line">    </span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2 <code>locator.type()</code>输入文本是以一个字符一个字符输入的，模拟我们在键盘上键入的每一个字符</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = browser.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).<span class="built_in">type</span>(<span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    <span class="comment"># delay 是设置输入延迟时间，不然看不到效果</span></span><br><span class="line">	  <span class="comment">#page.get_by_placeholder(&#x27;手机号或邮箱&#x27;).type(&#x27;1760123456&#x27;,delay=1000)</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<p>执行代码会发现，打开百度的时候，输入<code>playwright</code>的是一个字符一个字符输入的，但是速度很快需要仔细观察。</p>
+<p><strong>备注</strong>：<code>type()</code>方法相当于执行了所有必要的键盘事件，如<code>keydown</code>，<code>keyup</code>，<code>keypress</code>事件，甚至可以指定<code>delay</code>按键之间的可选操作来模拟真实的用户行为。</p>
+<h4 id="日期控件"><a href="#日期控件" class="headerlink" title="日期控件"></a>日期控件</h4><blockquote>
+<p>第一种：直接输入</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">page.goto(<span class="string">&#x27;http://&#x27;</span>)</span><br><span class="line"><span class="comment"># 日历控件直接输入</span></span><br><span class="line">page.locator(<span class="string">&#x27;#date_day&#x27;</span>).fill(<span class="string">&#x27;2021-04-01&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#代码示例</span></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line"></span><br><span class="line">    page1.goto(<span class="string">&quot;https://vip.ceshiren.com/#/ui_study/date_picker&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page1.title())</span><br><span class="line">    page1.locator(<span class="string">&#x27;#d&#x27;</span>).fill(<span class="string">&#x27;2024-01-15&#x27;</span>)</span><br><span class="line">    page1.locator(<span class="string">&#x27;#a&#x27;</span>).fill(<span class="string">&#x27;2024-01-20&#x27;</span>)</span><br><span class="line">    page1.locator(<span class="string">&#x27;#t&#x27;</span>).fill(<span class="string">&#x27;20:30:44&#x27;</span>)</span><br><span class="line">    page1.locator(<span class="string">&#x27;#i&#x27;</span>).fill(<span class="string">&#x27;20:32:44&#x27;</span>)</span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第二种：有些日历控件是 readonly 属性，也就是不能直接输入的</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; id=&quot;birth_day&quot; name=&quot;birthday&quot; value=&quot;2023-04-02&quot; readonly=&quot;readonly&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种情况先要执行JavaScript 去掉元素的 readonly 属性，再输入</p>
+<p>JavaScript 操作日历控件</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    ......<span class="comment"># 简写</span></span><br><span class="line"></span><br><span class="line">    page.goto(<span class="string">&#x27;http://&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 去掉元素的readonly属性</span></span><br><span class="line">    js1 = <span class="string">&#x27;document.getElementById(&quot;birth_day&quot;).removeAttribute(&quot;readonly&quot;);&#x27;</span></span><br><span class="line">    page.evaluate(js1)</span><br><span class="line">    <span class="comment"># 直接给输入框赋值</span></span><br><span class="line">    js2 = <span class="string">&#x27;document.getElementById(&quot;birth_day&quot;).value=&quot;2021-04-01&quot;;&#x27;</span></span><br><span class="line">    page.evaluate(js2)</span><br><span class="line"></span><br><span class="line">    page.pause()</span><br></pre></td></tr></table></figure>
+
+<h4 id="keyboard-键盘"><a href="#keyboard-键盘" class="headerlink" title="keyboard 键盘"></a>keyboard 键盘</h4><p>键盘事件提供了用于管理虚拟键盘的API，高级API是<code>keyboard.type()</code>，它使用的是原始字符再页面上生成对应的<code>keydown</code> 、 <code>keypress</code> &#x2F; <code>input</code> 和 <code>keyup</code> 事件。</p>
+<p>模拟真实键盘操作进行更精细的控制可以使用<code>keyboard.down()</code>、<code>keyboard.up()</code> 和 <code>keyboard.insert_text() </code>手动触发事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 模拟键盘输入 Hello World!</span><br><span class="line">page.keyboard.type(&quot;Hello World!&quot;)</span><br><span class="line"># 模拟键盘按下 ← 建</span><br><span class="line">page.keyboard.press(&quot;ArrowLeft&quot;)</span><br><span class="line"># 模拟键盘按下 Shift 键</span><br><span class="line">page.keyboard.down(&quot;Shift&quot;)</span><br><span class="line"># 模拟键盘按下 6次 ← 键</span><br><span class="line">for i in range(6):</span><br><span class="line">    page.keyboard.press(&quot;ArrowLeft&quot;)</span><br><span class="line"># 模拟键盘释放 Shift 键</span><br><span class="line">page.keyboard.up(&quot;Shift&quot;)</span><br><span class="line"># 模拟键盘按下 Backspace 键</span><br><span class="line">page.keyboard.press(&quot;Backspace&quot;)</span><br><span class="line"># 最后呈现的整体效果就是</span><br><span class="line"># 输出Hello World！选中了 World 并且删除，最后剩下 Hello！</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按出大写的A。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page.keyboard.press(&quot;Shift+KeyA&quot;)</span><br><span class="line"># or</span><br><span class="line">page.keyboard.press(&quot;Shift+A&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用键盘触发全选。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在windows或者linux系统使用</span><br><span class="line">page.keyboard.press(&quot;Control+A&quot;)</span><br><span class="line"># 在MacOS系统使用</span><br><span class="line">page.keyboard.press(&quot;Meta+A&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按住down</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keyboard.down(key)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>键盘操作测试网站：<a target="_blank" rel="noopener" href="https://cps-check.com/cn/test-keyboard">https://cps-check.com/cn/test-keyboard</a></p>
+<p><img src="https://gitee.com/brucema313/images/raw/master/img/202402142254277.webp" alt="图片"></p>
+</blockquote>
+<h4 id="弹框处理"><a href="#弹框处理" class="headerlink" title="弹框处理?"></a>弹框处理?</h4><p><code>（1）弹框类型</code></p>
+<p>div模态框：使用xpath、css等定位方法正常定位；</p>
+<p>系统弹框通常分为3种，分别为alert，confirm，promot。</p>
+<ul>
+<li>alert弹框：只有信息和确定按键</li>
+<li>confirm弹框：在alert弹窗基础上增加了取消按钮</li>
+<li>prompt弹框：在confirm的基础上增加了可输入文本内容的功能</li>
+</ul>
+<p>通过js代码动态生成的div弹框：这种弹框基本都是点击js代码监听到点击时间弹出的提示信息，1-2s之后会自动消失，类似于Android中的toast，这种正常定位即可；</p>
+<p><code>（2）弹框处理方法：</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">3000</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    <span class="comment"># context.tracing.start(snapshots=True, sources=True, screenshots=True)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line"></span><br><span class="line">    page1.goto(<span class="string">&quot;https://vip.ceshiren.com/#/ui_study/date_picker&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page1.title())</span><br><span class="line">    <span class="comment"># 启用dialog监控</span></span><br><span class="line">    page1.on(<span class="string">&quot;dialog&quot;</span>, <span class="keyword">lambda</span> dialog: dialog.accept())</span><br><span class="line">    page1.on(<span class="string">&quot;dialog&quot;</span>, <span class="keyword">lambda</span> dialog: <span class="built_in">print</span>(dialog.message))</span><br><span class="line">    <span class="comment"># alert弹框</span></span><br><span class="line">    page1.locator(<span class="string">&#x27;xpath=//*[@id=&quot;warning_btn&quot;]&#x27;</span>).click()</span><br><span class="line">    page1.wait_for_timeout(<span class="number">4000</span>)</span><br><span class="line">    <span class="comment"># 点击提示</span></span><br><span class="line">    page1.locator(<span class="string">&#x27;//*[@id=&quot;success_btn&quot;]&#x27;</span>).click()</span><br><span class="line">    page1.wait_for_timeout(<span class="number">4000</span>)</span><br><span class="line">    <span class="comment"># 双击后点击确认</span></span><br><span class="line">    page1.locator(<span class="string">&#x27;#primary_btn&#x27;</span>).dblclick()</span><br><span class="line">    page1.locator(<span class="string">&#x27;body &gt; div.el-message-box__wrapper &gt; div &gt; div.el-message-box__btns &gt; button&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    <span class="comment"># context.tracing.stop(path=&quot;trace.zip&quot;)</span></span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="鼠标点击"><a href="#鼠标点击" class="headerlink" title="鼠标点击"></a>鼠标点击</h4><blockquote>
+<p>通过使用<code>locator.click()</code>方法来帮助我们实现简单的点击操作</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 单击</span><br><span class="line">page.get_by_role(&quot;link&quot;, name=&quot;登录&quot;).click()</span><br><span class="line"># 双击</span><br><span class="line">page.get_by_text(&quot;登录&quot;).dblclick()</span><br><span class="line"># 右键</span><br><span class="line">page.get_by_role(&quot;link&quot;, name=&quot;登录&quot;).click(button=&quot;right&quot;)</span><br><span class="line"># Control+左键</span><br><span class="line">page.get_by_role(&quot;link&quot;, name=&quot;登录&quot;).click(modifiers=[&quot;Control&quot;])</span><br><span class="line"># Shift+左键</span><br><span class="line">page.get_by_role(&quot;link&quot;, name=&quot;登录&quot;).click(modifiers=[&quot;Shift&quot;])</span><br><span class="line"># Shift+右键</span><br><span class="line">page.get_by_role(&quot;link&quot;, name=&quot;登录&quot;).click(button=&quot;right&quot;, modifiers=[&quot;Shift&quot;])</span><br><span class="line"># 计数</span><br><span class="line">count = page.get_by_role(&quot;listitem&quot;).count() # 返回int值</span><br></pre></td></tr></table></figure>
+
+<h4 id="元素拖拽"><a href="#元素拖拽" class="headerlink" title="元素拖拽"></a>元素拖拽</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page1.locator(&#x27;#A&#x27;).drag_to(page1.locator(&#x27;.container ul:nth-of-type(2)&#x27;))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此方法将指定元素拖拽到目标元素，它将首先移动到源元素，执行<code>mousedown</code>，再移动到目标元素执行<code>mouseup</code></p>
+</blockquote>
+<p><strong>「使用方法」</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">page.drag_and_drop(&quot;#source&quot;, &quot;#target&quot;)</span><br><span class="line"># 或者指定相对于元素左上角的精确位置:  需要先用bounding获取到元素坐标再使用</span><br><span class="line">page.drag_and_drop(</span><br><span class="line">  &quot;#source&quot;,</span><br><span class="line">  &quot;#target&quot;,</span><br><span class="line">  source_position=&#123;&quot;x&quot;: 34, &quot;y&quot;: 7&#125;,</span><br><span class="line">  target_position=&#123;&quot;x&quot;: 10, &quot;y&quot;: 20&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># page1.drag_and_drop(&quot;#drag1&quot;, &quot;#div2&quot;) #2种写法</span><br><span class="line">page1.locator(&#x27;#drag1&#x27;).drag_to(page1.locator(&#x27;#div2&#x27;))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>测试网址:<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html5_draganddrop.asp">https://www.w3school.com.cn/html/html5_draganddrop.asp</a></p>
+</blockquote>
+<h4 id="鼠标悬停"><a href="#鼠标悬停" class="headerlink" title="鼠标悬停"></a>鼠标悬停</h4><p>有些元素，只有你鼠标移动到它那个位置上，他才会展开或者显示一些内容，这时候就要用到<code>hover</code>操作了。</p>
+<p><strong>「使用方法」</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.get_by_role(&quot;link&quot;).hover()</span><br></pre></td></tr></table></figure>
+
+<p><strong>「完整代码」</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">2000</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    context.tracing.start(snapshots=<span class="literal">True</span>, sources=<span class="literal">True</span>, screenshots=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page1.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment"># 打开百度地址</span></span><br><span class="line">    page1.locator(<span class="string">&quot;[name=&#x27;tj_briicon&#x27;]&quot;</span>).hover()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    context.tracing.stop(path=<span class="string">&quot;trace.zip&quot;</span>)</span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<p><strong>「参数」</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">类型</th>
+<th align="left">释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">force</td>
+<td align="left">bool</td>
+<td align="left">是否绕过可操作性检查。默认值为 <code>false</code></td>
+</tr>
+<tr>
+<td align="left">modifiers</td>
+<td align="left">List[“Alt”, “Control”, “Meta”, “Shift”]</td>
+<td align="left">要按下的键，有四个可供选择。</td>
+</tr>
+<tr>
+<td align="left">no_wait_after</td>
+<td align="left">bool</td>
+<td align="left">可以通过设置此标志来选择退出等待，只有在特殊情况下（例如导航到无法访问的页面）才需要此选项。默认值为 <code>false</code> 。</td>
+</tr>
+<tr>
+<td align="left">position</td>
+<td align="left">Dict</td>
+<td align="left">{x: float, y: float}</td>
+</tr>
+<tr>
+<td align="left">timeout</td>
+<td align="left">float</td>
+<td align="left">最长等待时间，单位毫秒，默认值为30000（30秒）。</td>
+</tr>
+<tr>
+<td align="left">trial</td>
+<td align="left">bool</td>
+<td align="left">设置后，此方法仅执行可操作性检查并跳过操作。默认值为 <code>false</code> 。等到元素可以执行操作时再执行。</td>
+</tr>
+</tbody></table>
+<p>可操作性检查表：<a target="_blank" rel="noopener" href="https://playwright.dev/python/docs/actionability">https://playwright.dev/python/docs/actionability</a></p>
+<p><strong>「此方法详细执行步骤」</strong></p>
+<ul>
+<li>等待元素的可操作性检查，除非<code>force</code>设置为<code>true</code></li>
+<li>如果需要的话，将元素滚动到视图中。</li>
+<li>使用<code>page.mouse</code>将鼠标悬停在元素的中心位置，或者是<code>position</code>所指定的位置。</li>
+<li>等待启动的导航成功或失败，除非<code>no_wait_after</code>设置为<code>true</code>。</li>
+</ul>
+<h4 id="下拉框"><a href="#下拉框" class="headerlink" title="下拉框"></a>下拉框</h4><blockquote>
+<p>使用<code>locator.select_option()</code>选择元素中的一个或多个选项。可以指定选项value，或label选择。可以选择多个选项</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 选择一个</span><br><span class="line">page.get_by_label(&#x27;address&#x27;).select_option(&#x27;上海&#x27;)</span><br><span class="line"># 选择多个</span><br><span class="line">page.get_by_label(&#x27;address&#x27;).select_option([&#x27;上海&#x27;, &#x27;南京&#x27;, &#x27;成都&#x27;])</span><br><span class="line"></span><br><span class="line">page.select_option(&#x27;#xz&#x27;, &#x27;sh&#x27;)          # 通过value选择</span><br><span class="line">page.select_option(&#x27;#xz&#x27;, &#x27;2&#x27;)           # 通过下标选择</span><br><span class="line">page.select_option(&#x27;#xz&#x27;, &#x27;上海&#x27;)         # 通过label选择</span><br></pre></td></tr></table></figure>
+
+<h4 id="单选多选"><a href="#单选多选" class="headerlink" title="单选多选"></a>单选多选</h4><blockquote>
+<p>选中和取消选中多选框或单选按钮，<code> locator.check()</code>。此方法可用于 <code>input[type=checkbox]</code>，<code>input[type=radio] </code>和 <code>[role=checkbox] </code>元素</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 选中</span><br><span class="line">page.get_by_label(&#x27;test&#x27;).check()</span><br><span class="line"># 取消选中</span><br><span class="line">page.get_by_label(&#x27;test&#x27;).uncheck()</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><blockquote>
+<p>使用<code>locator.set_input_files()</code>方法选择要上传的输入文件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 上传单个文件</span><br><span class="line">page.get_by_label(&quot;file&quot;).set_input_files(&#x27;file.txt&#x27;)</span><br><span class="line"># 上传多个文件</span><br><span class="line">page.get_by_label(&quot;files&quot;).set_input_files([&#x27;file1.txt&#x27;, &#x27;file2.txt&#x27;])</span><br><span class="line"># 移除所有文件</span><br><span class="line">page.get_by_label(&quot;Upload file&quot;).set_input_files([])</span><br><span class="line"># 从缓存中上传</span><br><span class="line">page.get_by_label(&quot;Upload file&quot;).set_input_files(</span><br><span class="line">    files=[&#123;&quot;name&quot;: &quot;test.txt&quot;, &quot;mimeType&quot;: &quot;text/plain&quot;, &quot;buffer&quot;: b&quot;this is a test&quot;&#125;],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 批量上传文件夹下所有文件</span><br><span class="line"># 获取文件夹中所有文件路径 folder_path为文件夹路径</span><br><span class="line">file_paths = []</span><br><span class="line">for root,dirs,files in os.walk(folder_path):</span><br><span class="line">	for file in files:</span><br><span class="line">		file_paths.append(os.path.join(root,file))</span><br><span class="line">for file_path in file_paths:</span><br><span class="line">	# 获取文件名</span><br><span class="line">	file_name = os.path.basename(file_path)</span><br><span class="line">	# 导航到上传页面</span><br><span class="line">	page.goto(&#x27;https://&#x27;)</span><br><span class="line">	# 等待文件上传元素可见</span><br><span class="line">	page.wait_for_selector(&#x27;input[type=file]&#x27;)</span><br><span class="line">	# 设置文件输入框的值</span><br><span class="line">	page.set_input_files(&#x27;input[type=file]&#x27;,file_path)</span><br><span class="line">	# 等待文件上传完成</span><br><span class="line">	page.wait_for_load_state()</span><br><span class="line">	# 提交上传表单</span><br><span class="line">	page.click(&#x27;input[type=submit]&#x27;)</span><br><span class="line">	print(f&#x27;Uploaded file:&#123;file_name&#125;)</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>非input文件上传</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 弹出文件框继续操作</span><br><span class="line">with page.expect_file_chooser() as fc_info:</span><br><span class="line">	page.get_by_label(&#x27;选择文件&#x27;).click()</span><br><span class="line">page.pause()</span><br><span class="line">file_chooser = fc_info.value</span><br><span class="line"></span><br><span class="line">file_chooser.set_files(r&#x27;D:\&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#filechooser 事件监听： 会自动监听filechooser事件，只要有点击了选择文件按钮，就会自动触发</span><br><span class="line">page.on(&#x27;filechooser&#x27;,lambda file_chooser: file_chooser.set_files(r&#x27;D:\))</span><br><span class="line"># 点击选择文件按钮，会触发filechooser事件</span><br><span class="line">page.get_by_label(&#x27;选择文件&#x27;).click()</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件下载？"><a href="#文件下载？" class="headerlink" title="文件下载？"></a>文件下载？</h4><h4 id="高亮调试元素"><a href="#高亮调试元素" class="headerlink" title="高亮调试元素"></a>高亮调试元素</h4><p>在我们调试元素定位的时候，不知道页面上有多少个此类元素，不清楚页面上这个元素具体显示在什么位置，这时候就可以使用<code> locator.highlight（）</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">page.locator(&quot;#kw&quot;).highlight()</span><br><span class="line"></span><br><span class="line">page.get_by_text(&quot;自动化&quot;).highlight()</span><br><span class="line"># 不再详细展开解释</span><br><span class="line"></span><br><span class="line">page.get_by_text(&quot;自动化&quot;).nth(1).highlight() # 第二个元素高亮</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="聚焦元素"><a href="#聚焦元素" class="headerlink" title="聚焦元素"></a>聚焦元素</h4><blockquote>
+<p>使用<code>locator.focus()</code>聚焦给定的元素</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.get_by_label(&#x27;password&#x27;).focus()</span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本录制"><a href="#脚本录制" class="headerlink" title="脚本录制"></a>脚本录制</h3><p>方式一：<code>playwright codegen</code>，会打开一个无痕浏览器，需要手动输入网址</p>
+<p>方式二：<code>playwright codegen baidu.com</code>，打开浏览器，自动访问百度页面 运行后会启动2个窗口，一个是需要操作的窗口，一个是inspector可以生成对应脚本的窗口。</p>
+<blockquote>
+<p>脚本切换：复制脚本到pycharm等文件中，运行查看效果。<img src="https://gitee.com/brucema313/images/raw/master/img/202402142254041.webp" alt="图片">脚本提供切换其他编程语言（Java、js等）以及一些其他的功能，如改位异步操作，生成测试的代码等。</p>
+</blockquote>
+<h4 id="异步Library-Async"><a href="#异步Library-Async" class="headerlink" title="异步Library Async"></a>异步Library Async</h4><blockquote>
+<p>选择<code>Library Async</code>后，会生成异步的方式去进行访问百度页面</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import asyncio</span><br><span class="line"></span><br><span class="line">from playwright.async_api import Playwright, async_playwright, expect</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">async def run(playwright: Playwright) -&gt; None:</span><br><span class="line">    browser = await playwright.chromium.launch(headless=False)</span><br><span class="line">    context = await browser.new_context()</span><br><span class="line">    page = await context.new_page()</span><br><span class="line">    await page.goto(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">    await page.screenshot(path=&#x27;example2.webp&#x27;)</span><br><span class="line"></span><br><span class="line">    await context.close()</span><br><span class="line">    await browser.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">async def main() -&gt; None:</span><br><span class="line">    async with async_playwright() as playwright:</span><br><span class="line">        await run(playwright)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><blockquote>
+<p>使用xdist同时运行多个用例</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install pytest-xdist</span><br><span class="line">pytest --numprocesses 2 # 设置为2~CPU数量之间，如果设置过大  机器会报错</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="模拟手机"><a href="#模拟手机" class="headerlink" title="模拟手机"></a>模拟手机</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    iphone_11 = p.devices[<span class="string">&#x27;iPhone 11 Pro&#x27;</span>]</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = browser.new_context(**iphone_11,locale=<span class="string">&#x27;zh-CN&#x27;</span>)</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)</span><br><span class="line">    page.click(<span class="string">&#x27;#logo&#x27;</span>)</span><br><span class="line">    page.screenshot(path=<span class="string">&#x27;colosseum-iphone.webp&#x27;</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="调用已经打开的浏览器"><a href="#调用已经打开的浏览器" class="headerlink" title="调用已经打开的浏览器"></a>调用已经打开的浏览器</h4><blockquote>
+<p>配置浏览器的path环境变量，然后cmd运行以下命令。端口可以自定义</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome --remote-debugging-port=9222</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>或者，执行如下代码：(推荐)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以使用bat命令手动打开该浏览器，也可以通过如下命令打开</span></span><br><span class="line">command = <span class="string">r&quot;C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\selenium\AutomationProfile&quot;</span></span><br><span class="line">subprocess.Popen(command)</span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">playwright = sync_playwright().start()</span><br><span class="line"><span class="comment"># 连接已打开浏览器，找好端口</span></span><br><span class="line">browser = playwright.chromium.connect_over_cdp(<span class="string">&quot;http://127.0.0.1:9222&quot;</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">default_context = browser.contexts[<span class="number">0</span>] <span class="comment"># 注意这里不是browser.new_page()了</span></span><br><span class="line">page = default_context.pages[<span class="number">0</span>]</span><br><span class="line">page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(page.title()) <span class="comment">#百度一下，你就知道</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="浏览器中运行JS"><a href="#浏览器中运行JS" class="headerlink" title="浏览器中运行JS"></a>浏览器中运行JS</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">2000</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)</span><br><span class="line">    dimensions = page.evaluate(<span class="string">&#x27;&#x27;&#x27;() =&gt; &#123;</span></span><br><span class="line"><span class="string">      return &#123;</span></span><br><span class="line"><span class="string">        width: document.documentElement.clientWidth,</span></span><br><span class="line"><span class="string">        height: document.documentElement.clientHeight,</span></span><br><span class="line"><span class="string">        deviceScaleFactor: window.devicePixelRatio</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;&#x27;&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(dimensions)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<p>通过使用<code>python -m playwright codegen -h</code> 查询录制功能的参数对应的功能</p>
+<ul>
+<li><code>-o</code>：保存路径，也可以写成<code>--output</code>，<code>-o D:\01 programming\xxx.py</code></li>
+<li><code>--target</code>：指定编程语言，<code>--target python</code></li>
+<li><code>-b</code>：指定浏览器，<code>-b chromium</code></li>
+<li><code>--save-storage</code>：保存登录状态，<code>--save-storage=auth.json</code></li>
+<li><code>--load-storage</code>：加载登录状态，<code>--load-storage=auth.json</code></li>
+<li><code>--viewport-size</code>：设置打开浏览器窗口大小，<code>--viewport-size=1000,800</code></li>
+<li><code>--device</code>：使用设置视口大小和用户代理等选项模拟移动设备，需要双引号并区分大小写，<code>--device=&quot;iPhone 15&quot;</code></li>
+<li><code>--color-scheme</code>：模拟打开浏览器的配色，<code>--color-scheme=dark</code></li>
+<li><code>--geolocation</code>：模拟地理位置，<code>--geolocation=&quot;30.890221,120.492348&quot;</code></li>
+<li><code>--timezone</code>：模拟时区，<code>--timezone=&quot;Asia/Shanghai&quot;</code></li>
+<li><code>--lang</code>：模拟语言，<code>--lang=&quot;zh-CN&quot;</code></li>
+</ul>
+<h4 id="适配pytest"><a href="#适配pytest" class="headerlink" title="适配pytest"></a>适配pytest</h4><blockquote>
+<p>选择<code>pytest</code>会生成基于pytest测试框架的代码，实现访问百度，并输入playwright，按下回车进行搜索的功能</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from playwright.sync_api import Page, expect</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def test_example(page: Page) -&gt; None:</span><br><span class="line">    page.goto(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">    page.locator(&quot;#kw&quot;).click()</span><br><span class="line">    page.locator(&quot;#kw&quot;).fill(&quot;playwright&quot;)</span><br><span class="line">    page.locator(&quot;#kw&quot;).press(&quot;Enter&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h4><blockquote>
+<p>在脚本中注意两处代码即可实现录制视频：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># browser = p.chromium.launch(headless=False,slow_mo=2000)</span></span><br><span class="line">context = browser.new_context(record_video_dir=<span class="string">&#x27;videos/&#x27;</span>)</span><br><span class="line">。。。。</span><br><span class="line"><span class="comment"># 一定要有这句，否则不会关闭，也就无法保存录制的视频</span></span><br><span class="line">context.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="上下文标签页管理"><a href="#上下文标签页管理" class="headerlink" title="上下文标签页管理"></a>上下文标签页管理</h3><p><code>什么浏览器上下文？</code></p>
+<p>相当于打开了一个浏览器，通过<code>browser.new_context()</code> 创建一个新的浏览器上下文。它不会与其他浏览器上下文共享 cookies&#x2F;缓存。<code>使用browser.new_context()</code> 创建context对象，context之间是相互隔离的，可以理解为轻量级的浏览器实例。在浏览器中有很多的标签页，这种都是通过浏览器上下文进行管理的，通过<code>context = browser.new_context()</code> 创建一个浏览器上下文，然后通过上下问，可以创建出很多个标签页来，如：<code>page1 = context.new_page()</code>，<code>page2 = context.new_page()</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page1.goto(<span class="string">&#x27;https://www.bilibili.com/&#x27;</span>)  <span class="comment"># 打开</span></span><br><span class="line">    page1.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page2 = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page2.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment"># 打开百度地址</span></span><br><span class="line">    <span class="comment"># 标题</span></span><br><span class="line">    <span class="built_in">print</span>(page2.title())</span><br><span class="line">    page2.fill(<span class="string">&#x27;#kw&#x27;</span>, <span class="string">&#x27;python&#x27;</span>)  <span class="comment"># 输入内容</span></span><br><span class="line">    page2.click(<span class="string">&#x27;#su&#x27;</span>)  <span class="comment"># 点击搜索</span></span><br><span class="line">    page2.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="保存cookie"><a href="#保存cookie" class="headerlink" title="保存cookie"></a>保存cookie</h4><blockquote>
+<p>方式一：通过context上下文获取cookies，然后通过json模块写入文件</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	  page.goto(<span class="string">&quot;https://1234567890.pingcode.com/wiki/spaces&quot;</span>)</span><br><span class="line">    page.get_by_placeholder(<span class="string">&quot;请输入手机号/邮箱&quot;</span>).<span class="built_in">type</span>(<span class="string">&quot;30278257@qq.com&quot;</span>, delay=<span class="number">30</span>)</span><br><span class="line">    page.get_by_placeholder(<span class="string">&quot;请输入登录密码&quot;</span>).fill(<span class="string">&quot;playwright0&quot;</span>)</span><br><span class="line">    page.get_by_role(<span class="string">&quot;button&quot;</span>, name=<span class="string">&quot;登录&quot;</span>)</span><br><span class="line">    page.get_by_role(<span class="string">&quot;button&quot;</span>, name=<span class="string">&quot;登录&quot;</span>).click()</span><br><span class="line">    expect(page.locator(<span class="string">&#x27;.avatar-default&#x27;</span>).first).to_be_visible()</span><br><span class="line">    cookie = page.context.cookies()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;cookie.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="built_in">str</span>(cookie))</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 加载cookie</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;cookie.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">        cookie=f.read()</span><br><span class="line">    cookie=<span class="built_in">eval</span>(cookie)</span><br><span class="line">    page.context.add_cookies(cookie)</span><br><span class="line">    page.goto(<span class="string">&quot;https://1234567890.pingcode.com/wiki/spaces&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>方式二：直接使用<code>context.storage_state()</code>指定下文件目录写入文件</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">5000</span>)  <span class="comment"># 设置了每步等待时间为5s</span></span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    page = context.new_page()  <span class="comment"># 打开一个页面</span></span><br><span class="line">    page.goto(<span class="string">&quot;http://novel.hctestedu.com/&quot;</span>)</span><br><span class="line">    page.click(<span class="string">&quot;text=&#x27;登录&#x27;&quot;</span>)</span><br><span class="line">    page.fill(<span class="string">&#x27;#txtUName&#x27;</span>, <span class="string">&#x27;18888888888&#x27;</span>)</span><br><span class="line">    page.fill(<span class="string">&#x27;#txtPassword&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line">    page.click(<span class="string">&#x27;#btnLogin&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    context.storage_state(path=<span class="string">&quot;cookie.json&quot;</span>)   <span class="comment"># 保存storage_state 到JSON文件</span></span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="加载cookie"><a href="#加载cookie" class="headerlink" title="加载cookie"></a>加载cookie</h4><blockquote>
+<p>在创建上下文管理器的时候，可以通过加载本地之前保存的cookie来完成免登录的操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">5000</span>)</span><br><span class="line"></span><br><span class="line">    context = browser.new_context(storage_state=<span class="string">&quot;cookie.json&quot;</span>) <span class="comment">#(storage_state=&quot;cookie.json&quot;)</span></span><br><span class="line">    page = context.new_page()  <span class="comment"># 打开一个页面</span></span><br><span class="line">    page.goto(<span class="string">&quot;http://novel.hctestedu.com/&quot;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">4000</span>)</span><br><span class="line">    page.screenshot(path=<span class="string">&quot;image.webp&quot;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">4000</span>)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换标签页"><a href="#切换标签页" class="headerlink" title="切换标签页"></a>切换标签页</h4><blockquote>
+<p>切换标签页playwright只需要一行代码(# page1.bring_to_front())。但如果是原页面新增了标签页需要切换回前面标签呢，封装以下代码switch_to_page，通过url和title切换回去。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">switch_to_page</span>(<span class="params">context, url: <span class="built_in">str</span> = <span class="literal">None</span>, title: <span class="built_in">str</span> = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    切换到指定url</span></span><br><span class="line"><span class="string">    :param context:传入一个浏览器上下文</span></span><br><span class="line"><span class="string">    :param title: 当前标签页的标题</span></span><br><span class="line"><span class="string">    :param url: 当前标签页的url</span></span><br><span class="line"><span class="string">    :return: label_page:Page对象 返回对应的标签页,如果没找到则返回最新的标签页</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> label_page <span class="keyword">in</span> context.pages:</span><br><span class="line">        <span class="keyword">if</span> url:</span><br><span class="line">            <span class="keyword">if</span> url <span class="keyword">in</span> label_page.url:</span><br><span class="line">                label_page.bring_to_front()</span><br><span class="line">                <span class="keyword">return</span> label_page</span><br><span class="line">        <span class="keyword">elif</span> title:</span><br><span class="line">            <span class="keyword">if</span> title <span class="keyword">in</span> label_page.title():</span><br><span class="line">                label_page.bring_to_front()</span><br><span class="line">                <span class="keyword">return</span> label_page</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> title:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;没有找到【<span class="subst">&#123;title&#125;</span>】标题的标签页&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> url:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;没有找到【<span class="subst">&#123;url&#125;</span>】网址的标签页&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> context.pages[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">2000</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    context.tracing.start(snapshots=<span class="literal">True</span>, sources=<span class="literal">True</span>, screenshots=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line">    <span class="comment"># 调到指定页面</span></span><br><span class="line">    page1.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment"># 打开百度地址</span></span><br><span class="line">    <span class="comment"># 标题</span></span><br><span class="line">    <span class="built_in">print</span>(page1.title())</span><br><span class="line"></span><br><span class="line">    page2 = context.new_page()</span><br><span class="line">    page2.goto(<span class="string">&#x27;http://demo.liumatest.cn/#/home/dashboard&#x27;</span>)</span><br><span class="line">    page3 = context.new_page()</span><br><span class="line">    page3.goto(<span class="string">&#x27;http://novel.hctestedu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># switch_to_page(context, url=&#x27;baidu&#x27;) #模糊匹配baidu</span></span><br><span class="line">    switch_to_page(context, title=page1.title()) <span class="comment">#通过title切换标签页</span></span><br><span class="line">    <span class="comment"># page1.bring_to_front() #通过自定义的pagename来切换标签页</span></span><br><span class="line"></span><br><span class="line">    page1.fill(<span class="string">&#x27;#kw&#x27;</span>, <span class="string">&#x27;python&#x27;</span>)  <span class="comment"># 输入内容</span></span><br><span class="line">    page1.click(<span class="string">&#x27;#su&#x27;</span>)  <span class="comment"># 点击搜索</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    context.tracing.stop(path=<span class="string">&quot;trace.zip&quot;</span>)</span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="iframe切换"><a href="#iframe切换" class="headerlink" title="iframe切换"></a>iframe切换</h4><blockquote>
+<p>在网页当中应用得非常广泛，尤其是页面比较复杂的情况，需要单独设置一个独立的边框或者是栏目。通过iframe的id进入对应的iframe页面，然后操作：page.frame_locator(‘#YSF-IFRAME-LAYER’)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.frame_locator(&#x27;#YSF-IFRAME-LAYER&#x27;).locator(&#x27;//img[]&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="playwright断言"><a href="#playwright断言" class="headerlink" title="playwright断言"></a>playwright断言</h4><p><img src="https://gitee.com/brucema313/images/raw/master/img/202402142255979.webp" alt="图片"></p>
+<h3 id="换种写法"><a href="#换种写法" class="headerlink" title="换种写法"></a>换种写法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">playwright</span>):</span><br><span class="line">    browser = playwright.chromium.launch(headless=<span class="literal">False</span>, slow_mo=<span class="number">2000</span>)</span><br><span class="line">    <span class="comment"># context = browser.new_context(record_video_dir=&#x27;videos/&#x27;)</span></span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    <span class="comment"># 启动跟踪功能</span></span><br><span class="line">    <span class="comment"># context.tracing.start(snapshots=True, sources=True, screenshots=True)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开新页面</span></span><br><span class="line">    page1 = context.new_page()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># # 调到指定页面</span></span><br><span class="line">    <span class="comment"># page1.goto(&#x27;https://draw.yunser.com/&#x27;)</span></span><br><span class="line">    <span class="comment"># # page1.goto(&#x27;https://www.w3school.com.cn/html/html5_draganddrop.asp&#x27;)</span></span><br><span class="line">    <span class="comment"># # page1.drag_and_drop(&quot;#drag1&quot;, &quot;#div2&quot;) #2种写法</span></span><br><span class="line">    <span class="comment"># # page1.locator(&#x27;#drag1&#x27;).drag_to(page1.locator(&#x27;#div2&#x27;))</span></span><br><span class="line">    <span class="comment"># bounding = page1.locator(&#x27;#mycanvas-9&#x27;).bounding_box()</span></span><br><span class="line">    <span class="comment"># print(bounding)  # &#123;&#x27;x&#x27;: 281, &#x27;y&#x27;: 91, &#x27;width&#x27;: 500, &#x27;height&#x27;: 500&#125;</span></span><br><span class="line">    <span class="comment"># print(bounding[&#x27;x&#x27;])</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># # page1.locator(&#x27;#mycanvas-9&#x27;).hover()</span></span><br><span class="line">    <span class="comment"># # 使用` page.mouse` 画 一个100x100的正方形。</span></span><br><span class="line">    <span class="comment"># # 鼠标移动到（0,0）坐标</span></span><br><span class="line">    <span class="comment"># page1.mouse.move(bounding[&#x27;x&#x27;]+5, bounding[&#x27;y&#x27;]+5)</span></span><br><span class="line">    <span class="comment"># # 按下鼠标</span></span><br><span class="line">    <span class="comment"># page1.mouse.down()</span></span><br><span class="line">    <span class="comment"># # 鼠标纵坐标向下移动100像素</span></span><br><span class="line">    <span class="comment"># page1.mouse.move(bounding[&#x27;x&#x27;]+5, bounding[&#x27;y&#x27;]+105)</span></span><br><span class="line">    <span class="comment"># # 鼠标横坐标向右移动100像素</span></span><br><span class="line">    <span class="comment"># page1.mouse.move(bounding[&#x27;x&#x27;]+105, bounding[&#x27;y&#x27;]+105)</span></span><br><span class="line">    <span class="comment"># # 鼠标纵坐标向上移动100像素</span></span><br><span class="line">    <span class="comment"># page1.mouse.move(bounding[&#x27;x&#x27;]+105, bounding[&#x27;y&#x27;]+5)</span></span><br><span class="line">    <span class="comment"># # 鼠标横坐标向左移动100像素</span></span><br><span class="line">    <span class="comment"># page1.mouse.move(bounding[&#x27;x&#x27;]+5, bounding[&#x27;y&#x27;]+5)</span></span><br><span class="line">    <span class="comment"># # 释放鼠标</span></span><br><span class="line">    <span class="comment"># page1.mouse.up()</span></span><br><span class="line"></span><br><span class="line">    page1.goto(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page1.title())</span><br><span class="line">    <span class="comment"># page.locator(&#x27;#kw&#x27;).fill(&#x27;playwright&#x27;) #另一种写法</span></span><br><span class="line">    page1.fill(<span class="string">&#x27;#kw&#x27;</span>, <span class="string">&#x27;playwright&#x27;</span>)</span><br><span class="line">    page1.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    page1.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    delta_x = <span class="number">0</span>  <span class="comment"># 水平滚动0像素</span></span><br><span class="line">    delta_y = <span class="number">100</span>  <span class="comment"># 垂直滚动100像素</span></span><br><span class="line">    page1.mouse.wheel(delta_x, delta_y)</span><br><span class="line"></span><br><span class="line">    context.close()</span><br><span class="line">    <span class="comment"># 结束跟踪</span></span><br><span class="line">    <span class="comment"># context.tracing.stop(path=&quot;trace.zip&quot;)</span></span><br><span class="line">    <span class="comment"># 关闭</span></span><br><span class="line">    browser.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> playwright:</span><br><span class="line">    run(playwright)</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动化或爬虫相关拓展"><a href="#自动化或爬虫相关拓展" class="headerlink" title="自动化或爬虫相关拓展"></a>自动化或爬虫相关拓展</h3><p>文章链接：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg2NDA0NTQyMw==&mid=2247486284&idx=1&sn=945209f40314fdb9c32b8bdd9d7a02e0&chksm=ce6e1b4cf919925a84d1dabfcb4793aa18585f8cb0ad3339e8e019b2964d1a6352110cd00fd6&cur_album_id=3086310134054387717&scene=189#wechat_redirect">【python自动化】Playwright基础教程（十）元素拖拽&amp;元素坐标&amp;爬虫必备：获取网页源码&amp;元素内文本 (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzk0NzYyODcwNA==&mid=2247484070&idx=1&sn=fdc704acdc356289a4adad4c1bc895bd&chksm=c372bd69f405347f8363b09381f95be988aca424e0feb800c95a5abcdae8631e2ed828293ea3&cur_album_id=3251824637550919683&scene=189#wechat_redirect">Playwright自动化框架系列(七) (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?src=11&timestamp=1705718500&ver=5029&signature=E0PpYKlUMiPFikf9hoKv6YrQWM0eyxkQ-0UWEEMW7Yj0sGv98a*XCoC0UAjM91vFnC*giGZj*MWW-18KcYF9tboxxg6PfJ0XiL6WrdEfMbdzNN6l3mS9i7zytvIkpAQU&new=1">playwright自动化&#x2F;爬虫（2） (qq.com)</a></p>
+<p>博客：</p>
+<p><a target="_blank" rel="noopener" href="https://cuiqingcai.com/">静觅丨崔庆才的个人站点 - Python 爬虫教程 (cuiqingcai.com)</a></p>
+<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>1.跨浏览器测试和移动测试：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0NDQ5NzYxNg==&mid=2247489648&idx=1&sn=b51d1245142ffb4c86e713e3a8bd4662&chksm=e95db5cfde2a3cd96eadab2c42519551705fadcc2d83330c5b8c73b1f5d741824923654c8401&cur_album_id=2852726061296533506&scene=189#wechat_redirect">Playwright系列：第7章 Playwright跨浏览器与移动测试 (qq.com)</a></p>
+<p>2.Playwright Grid提供了强大的分布式测试功能,可以实现多设备同时测试,加速测试过程,模拟真实用户环境等。理解Playwright Grid的工作原理及其使用步骤,可以帮助我们更高效地编写和执行自动化测试。<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0NDQ5NzYxNg==&mid=2247489670&idx=1&sn=eeacfb3743d1845b395c13121eed7f80&chksm=e95db539de2a3c2ff20f0ff5367b1c7634613c6d1db6e1945fde1c1c545671bc9c1abeeb30b0&cur_album_id=2852726061296533506&scene=189#wechat_redirect">Playwright系列：第9章 使用Playwright Grid进行分布式测试 (qq.com)</a></p>
+<h4 id="自动化问题汇总"><a href="#自动化问题汇总" class="headerlink" title="自动化问题汇总"></a>自动化问题汇总</h4><p><strong>1.UI自动化测试是否需要连接数据库校验</strong></p>
+<p>不需要，按照测试金字塔层，最上层UI层，中间层API接口层，最底层单元测试层，可以早AIP接口层做数据库校验，UI层只需要模拟用户操作</p>
+<p><strong>2.UI自动测试用例如何设计</strong></p>
+<p> UI自动化用例从手工用例中提取出来的，更加注重测试用例的严谨性</p>
+<p> 应该遵循以下原则</p>
+<ul>
+<li><p>1.优先选取覆盖产品核心功能的用例</p>
+</li>
+<li><p>2.从成本上考量，不要选择流程过于复杂的用例</p>
+</li>
+<li><p>3.选取的用例可以是重复执行，繁琐的部分</p>
+</li>
+<li><p>4.优先实行正向的测试用例，反向用例一般情况复杂，数量多</p>
+<p>  <strong>3.如何提高UI自动化脚本的稳定性</strong></p>
+</li>
+<li><p>1.尽量用相对路径xpath表达式</p>
+</li>
+<li><p>2.查找元素优先使用显示等待（非全局查找）</p>
+</li>
+<li><p>3.用例与用例之间尽量避免产生依赖，用例可以单独执行</p>
+</li>
+<li><p>4.用例执行结束后对测试场景进行还原，避免影响其他用例执行</p>
+</li>
+<li><p>5.脚本执行失败后加入重试机制，提高用例的稳定性</p>
+</li>
+<li><p>6.尽量保证单独的测试环境，避免其他测试同步进行</p>
+<p>  <strong>4.如何提高UI自动化脚本的可维护性</strong></p>
+</li>
+<li><p>1、po分层模式，业务和页面元素的分离</p>
+</li>
+<li><p>2、测试数据和用例的分离，单独维护测试数据</p>
+</li>
+<li><p>3、页面和用例共性提取</p>
+</li>
+<li><p>4、可追溯日志</p>
+<p>  <strong>5.自动化实现困难的地方</strong></p>
+</li>
+<li><p>1、需求经常变动，脚本维护成本较高</p>
+</li>
+<li><p>2、特殊元素难定位</p>
+</li>
+<li><p>3、脚本执行不稳定，经常fail</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://myhao.vercel.app">马永浩</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://myhao.vercel.app/202401/61b9dd27.html">https://myhao.vercel.app/202401/61b9dd27.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://myhao.vercel.app" target="_blank">Myhao</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web%E8%87%AA%E5%8A%A8%E5%8C%96/">Web自动化</a></div><div class="post_share"><div class="social-share" data-image="https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>稀罕博主</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/202401/f4d501d6.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)"><img class="cover" src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)</div></div></a></div><div class="next-post pull-right"><a href="/202401/63ec6c46.html" title="测试开发导航之web自动化+selenium(已弃坑)"><img class="cover" src="https://v2rayshare.com/wp-content/uploads/2022/11/8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">测试开发导航之web自动化+selenium(已弃坑)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/202401/63ec6c46.html" title="测试开发导航之web自动化+selenium(已弃坑)"><img class="cover" src="https://v2rayshare.com/wp-content/uploads/2022/11/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-08</div><div class="title">测试开发导航之web自动化+selenium(已弃坑)</div></div></a></div><div><a href="/202401/5be49ab4.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)"><img class="cover" src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-12</div><div class="title">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马永浩</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>订 阅</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">意向合作请扫微信：请简要备注好友来源及信息，”相见是缘，相识是份，逐梦天涯，祝：万事皆顺“。<center><a><img src="/img/wx.png" width="200" height="" alt=""></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#selenium%E7%9C%9F%E5%A4%9A%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text">selenium真多坑</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Playwright%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Playwright简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Playwright%E4%B8%8ESelenium%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">Playwright与Selenium的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85playwright"><span class="toc-number">2.</span> <span class="toc-text">安装playwright</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">安装浏览器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5API"><span class="toc-number">2.2.</span> <span class="toc-text">同步API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#playwright%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">playwright基础用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E7%AD%89%E5%BE%85"><span class="toc-number">3.1.</span> <span class="toc-text">界面等待</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%9F%E8%B8%AA%E8%AE%B0%E5%BD%95"><span class="toc-number">3.2.</span> <span class="toc-text">跟踪记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">元素定位与操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%82%AC%E6%B5%AE%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="toc-number">3.4.</span> <span class="toc-text">悬浮元素定位</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92"><span class="toc-number">4.</span> <span class="toc-text">页面交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%86%85%E5%AE%B9"><span class="toc-number">4.1.</span> <span class="toc-text">获取内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7"><span class="toc-number">4.2.</span> <span class="toc-text">获取属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%AA%E5%9B%BE"><span class="toc-number">4.3.</span> <span class="toc-text">截图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%9D%90%E6%A0%87"><span class="toc-number">4.4.</span> <span class="toc-text">元素坐标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E7%94%BB%E5%9B%BE"><span class="toc-number">4.5.</span> <span class="toc-text">鼠标画图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E6%BB%9A%E5%8A%A8"><span class="toc-number">4.6.</span> <span class="toc-text">鼠标滚动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%96%87%E6%9C%AC"><span class="toc-number">4.7.</span> <span class="toc-text">输入文本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6"><span class="toc-number">4.8.</span> <span class="toc-text">日期控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keyboard-%E9%94%AE%E7%9B%98"><span class="toc-number">4.9.</span> <span class="toc-text">keyboard 键盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%B9%E6%A1%86%E5%A4%84%E7%90%86"><span class="toc-number">4.10.</span> <span class="toc-text">弹框处理?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB"><span class="toc-number">4.11.</span> <span class="toc-text">鼠标点击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E6%8B%96%E6%8B%BD"><span class="toc-number">4.12.</span> <span class="toc-text">元素拖拽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E6%82%AC%E5%81%9C"><span class="toc-number">4.13.</span> <span class="toc-text">鼠标悬停</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E6%A1%86"><span class="toc-number">4.14.</span> <span class="toc-text">下拉框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E9%80%89%E5%A4%9A%E9%80%89"><span class="toc-number">4.15.</span> <span class="toc-text">单选多选</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.16.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%EF%BC%9F"><span class="toc-number">4.17.</span> <span class="toc-text">文件下载？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E4%BA%AE%E8%B0%83%E8%AF%95%E5%85%83%E7%B4%A0"><span class="toc-number">4.18.</span> <span class="toc-text">高亮调试元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E7%84%A6%E5%85%83%E7%B4%A0"><span class="toc-number">4.19.</span> <span class="toc-text">聚焦元素</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6"><span class="toc-number">5.</span> <span class="toc-text">脚本录制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5Library-Async"><span class="toc-number">5.1.</span> <span class="toc-text">异步Library Async</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91"><span class="toc-number">5.2.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E6%89%8B%E6%9C%BA"><span class="toc-number">5.3.</span> <span class="toc-text">模拟手机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%B7%B2%E7%BB%8F%E6%89%93%E5%BC%80%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">5.4.</span> <span class="toc-text">调用已经打开的浏览器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E8%BF%90%E8%A1%8CJS"><span class="toc-number">5.5.</span> <span class="toc-text">浏览器中运行JS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E9%85%8Dpytest"><span class="toc-number">5.6.</span> <span class="toc-text">适配pytest</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%95%E5%88%B6%E8%A7%86%E9%A2%91"><span class="toc-number">5.7.</span> <span class="toc-text">录制视频</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%87%E7%AD%BE%E9%A1%B5%E7%AE%A1%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">上下文标签页管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98cookie"><span class="toc-number">6.1.</span> <span class="toc-text">保存cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BDcookie"><span class="toc-number">6.2.</span> <span class="toc-text">加载cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="toc-number">6.3.</span> <span class="toc-text">切换标签页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iframe%E5%88%87%E6%8D%A2"><span class="toc-number">6.4.</span> <span class="toc-text">iframe切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#playwright%E6%96%AD%E8%A8%80"><span class="toc-number">6.5.</span> <span class="toc-text">playwright断言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E7%A7%8D%E5%86%99%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">换种写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%88%96%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3%E6%8B%93%E5%B1%95"><span class="toc-number">8.</span> <span class="toc-text">自动化或爬虫相关拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">8.1.</span> <span class="toc-text">拓展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB"><span class="toc-number">8.2.</span> <span class="toc-text">自动化问题汇总</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/202401/115cda02.html" title="测试开发导航之搭建Python+pytest+requests+excel+yaml+allure+Jenkins自动化持续集成(一)"><img src="https://v2rayshare.com/wp-content/uploads/2022/11/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试开发导航之搭建Python+pytest+requests+excel+yaml+allure+Jenkins自动化持续集成(一)"/></a><div class="content"><a class="title" href="/202401/115cda02.html" title="测试开发导航之搭建Python+pytest+requests+excel+yaml+allure+Jenkins自动化持续集成(一)">测试开发导航之搭建Python+pytest+requests+excel+yaml+allure+Jenkins自动化持续集成(一)</a><time datetime="2024-01-13T22:38:42.000Z" title="发表于 2024-01-13 22:38:42">2024-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/202401/5be49ab4.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)"><img src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)"/></a><div class="content"><a class="title" href="/202401/5be49ab4.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)</a><time datetime="2024-01-12T22:38:42.000Z" title="发表于 2024-01-12 22:38:42">2024-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/202401/f4d501d6.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)"><img src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)"/></a><div class="content"><a class="title" href="/202401/f4d501d6.html" title="测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)</a><time datetime="2024-01-11T22:38:42.000Z" title="发表于 2024-01-11 22:38:42">2024-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/202401/61b9dd27.html" title="测试开发导航之web自动化+上瘾Playwright"><img src="https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试开发导航之web自动化+上瘾Playwright"/></a><div class="content"><a class="title" href="/202401/61b9dd27.html" title="测试开发导航之web自动化+上瘾Playwright">测试开发导航之web自动化+上瘾Playwright</a><time datetime="2024-01-10T22:38:42.000Z" title="发表于 2024-01-10 22:38:42">2024-01-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/202401/63ec6c46.html" title="测试开发导航之web自动化+selenium(已弃坑)"><img src="https://v2rayshare.com/wp-content/uploads/2022/11/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试开发导航之web自动化+selenium(已弃坑)"/></a><div class="content"><a class="title" href="/202401/63ec6c46.html" title="测试开发导航之web自动化+selenium(已弃坑)">测试开发导航之web自动化+selenium(已弃坑)</a><time datetime="2024-01-08T12:38:42.000Z" title="发表于 2024-01-08 12:38:42">2024-01-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> 马永浩</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="/js/tw_cn.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'ff9be7f73c2eda3e03af',
+      clientSecret: '1d131423898119cd8ccca87216ff31c799031bb0',
+      repo: 'myhao',
+      owner: 'hulushuo',
+      admin: ['hulushuo'],
+      id: '8a487aa2fac39e74d0ba0215760cea04',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//npm.elemecdn.com/penndu@1.0.0/bsz.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/5be49ab4.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-12</span><a class="blog-slider__title" href="202401/5be49ab4.html" alt="">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(二)</a><div class="blog-slider__text">搭建本地私有gitlab服务器</div><a class="blog-slider__button" href="202401/5be49ab4.html" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/f4d501d6.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/5.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-11</span><a class="blog-slider__title" href="202401/f4d501d6.html" alt="">测试开发导航之搭建Python+pytest+playwright+allure+Jenkins自动化持续集成(一)</a><div class="blog-slider__text">搭建Jenkins+git+gogs持续集成web自动化框架</div><a class="blog-slider__button" href="202401/f4d501d6.html" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/9da3c6e6.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/4.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-04</span><a class="blog-slider__title" href="202401/9da3c6e6.html" alt="">MD5、AES和RSA快速入门</a><div class="blog-slider__text">加密解密在python中如何使用。</div><a class="blog-slider__button" href="202401/9da3c6e6.html" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/115cda02.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/6.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-13</span><a class="blog-slider__title" href="202401/115cda02.html" alt="">测试开发导航之搭建Python+pytest+requests+excel+yaml+allure+Jenkins自动化持续集成(一)</a><div class="blog-slider__text">API自动化进阶使用数据驱动框架。</div><a class="blog-slider__button" href="202401/115cda02.html" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/61b9dd27.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/7.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-10</span><a class="blog-slider__title" href="202401/61b9dd27.html" alt="">测试开发导航之web自动化+上瘾Playwright</a><div class="blog-slider__text">web自动化从入门到精通，AIGC时代用playwright完虐selenium</div><a class="blog-slider__button" href="202401/61b9dd27.html" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="202401/63ec6c46.html" alt=""><img width="48" height="48" src="https://v2rayshare.com/wp-content/uploads/2022/11/8.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-01-08</span><a class="blog-slider__title" href="202401/63ec6c46.html" alt="">测试开发导航之web自动化+selenium(已弃坑)</a><div class="blog-slider__text">web自动化从入门到精通</div><a class="blog-slider__button" href="202401/63ec6c46.html" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
